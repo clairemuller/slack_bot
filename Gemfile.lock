@@ -47,6 +47,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   dotenv
+  faraday
   github_api
   rack
   shotgun
