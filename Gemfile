@@ -15,3 +15,6 @@ gem 'github_api'
 gem 'dotenv'
 
 gem 'byebug'
+
+# for making post requests
+gem 'faraday'
