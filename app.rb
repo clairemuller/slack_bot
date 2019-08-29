@@ -33,4 +33,25 @@ class App < Sinatra::Base
     end
   end
 
+  post '/' do
+    # TODO: Change to OAuth 2.0 using a GitHub app instead of basic auth
+    # https://developer.github.com/apps/building-oauth-apps/
+    username = ENV['GITHUB_USERNAME']
+    pw = ENV['GITHUB_PASSWORD']
+    github_api = Github.new basic_auth: "#{username}:#{pw}"
+
+    # TODO: Might need to add checks for special characters
+    if params['text'].length == 0
+      "Please provide a description of the issue"
+    else
+      github_api.issues.create(
+        user: 'clairemuller',
+        repo: 'slack_bot_issues',
+        title: "slack user #{params['user_name']} found a bug",
+        body: params['text']
+      )
+      "Submitted issue: '#{params['text']}'"
+    end
+  end
+
 end
